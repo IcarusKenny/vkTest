@@ -1,0 +1,13 @@
+{
+  "require": {
+    "guzzlehttp/guzzle": "6.5.8",
+    "slim/slim": "^4.12.0",
+    "slim/psr7": "^1.6.1",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "src\\": "./"
+    }
+  }
+}
