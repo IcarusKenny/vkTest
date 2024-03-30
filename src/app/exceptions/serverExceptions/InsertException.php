@@ -1,10 +1,8 @@
 <?php
 
-namespace src\app\exceptions;
+namespace src\app\exceptions\serverExceptions;
 
-use Exception;
-
-class InsertException extends Exception
+class InsertException extends ServerException
 {
 
 }

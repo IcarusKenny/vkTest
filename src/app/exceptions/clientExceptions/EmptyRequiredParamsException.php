@@ -1,14 +1,8 @@
 <?php
 
-namespace src\app\exceptions;
+namespace src\app\exceptions\clientExceptions;
 
-use Exception;
-use Fig\Http\Message\StatusCodeInterface;
-
-class EmptyRequiredParamsException extends Exception
+class EmptyRequiredParamsException extends ClientException
 {
-    public function __construct()
-    {
-        parent::__construct('Empty required params', StatusCodeInterface::STATUS_BAD_REQUEST);
-    }
+    protected $message = 'Empty required params';
 }

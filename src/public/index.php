@@ -3,27 +3,29 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
-use src\app\consts\HttpCode;
-use src\app\models\SearchStorage;
+use src\app\controllers\UsersController;
+use src\app\middleware\ErrorHandlerMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 $app->setBasePath('/public');
 
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$app->group('', function () use ($app) {
+    $app->post(
+        '/register',
+        fn(Request $request, Response $response) => UsersController::register($request, $response)
+    );
 
-$app->get('/search/{keyword}/last', function (Request $request, Response $response, $args) {
-    $keyword = $args['keyword'];
+    $app->post(
+        '/authorize',
+        fn(Request $request, Response $response) => UsersController::authorize($request, $response)
+    );
 
-    if (!$keyword) {
-        return $response->withStatus(HttpCode::BAD_REQUEST);
-    }
-
-    $result = (new SearchStorage())->getLastKeywordSearchResult($keyword);
-    $response->getBody()->write($result);
-
-    return $response;
-});
+    $app->get(
+        '/feed',
+        fn(Request $request, Response $response) => UsersController::feed($request, $response)
+    );
+})->add(new ErrorHandlerMiddleware());
 
 $app->run();

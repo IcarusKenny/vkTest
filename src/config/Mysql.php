@@ -24,7 +24,7 @@ class Mysql
     /**
      * @var string
      */
-    private $dbname = 'testdb';
+    private $dbname = 'vktestdb';
 
     /**
      * @return PDO
