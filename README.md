@@ -19,8 +19,9 @@ exit
 5) Создать базу и таблицу:
 ```
 docker exec -ti db mysql --user=root --password=mypassword
+
 CREATE DATABASE vktestdb;
-use vktestdb;
+USE vktestdb;
 CREATE TABLE users
 (
     id    int primary key     not null auto_increment,
